@@ -16,10 +16,12 @@ alert ("Los productos disponibles para adquirir son los siguientes: " +"\nServic
 "\nServicio 3 " +"$"+ price3
 )
 
+// User Choice
 let choice = prompt("Ingrese el servicio que quiere adquirir")
 
 do{
 
+    // Switch de decision y acumulacion
     switch(choice){
         case "1":
             alert("Eligio 1");
@@ -45,8 +47,10 @@ do{
     //Si el parseo no resulta un número se interrumpe el bucle.
 }while(parseInt(choice));
 
+//llamo la funcion para calcular los totales
 calcularTotal()
 
+//funcion de calculo
 function calcularTotal() {
     total = (price1*contador1) + (price2*contador2) + (price3*contador3)
     if (total > 10000) {
