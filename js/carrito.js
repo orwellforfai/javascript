@@ -41,14 +41,14 @@ let producto2 = new Producto("Pizza Muzzarella", 600)                   //Produc
 clientes.push((new Cliente(                                                           //Cliente 1 de la BD
     "Martin",
     "Beltramo",
-    "26959775",
-    "martin_beltramo@hotmail.com")))
+    "26959770",
+    "mail@gmail.com")))
 
 clientes.push((new Cliente(                                                           //Cliente 2 de la BD
     "Valeria",
     "Kratochvill",
-    "31009620",
-    "valerianataliak@gmail.com")))
+    "31009628",
+    "mail@hotmail.com")))
 
 let total = 0
 let choice = 0
