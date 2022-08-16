@@ -4,9 +4,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Producto {
-    constructor(nombre, precio) {
+    constructor(id, nombre, precio, foto) {
+        this.id = id
         this.nombre = nombre
         this.precio = precio
+        this.foto = foto
     }
 
     mostrarProducto() {
@@ -23,12 +25,21 @@ class Cliente {
     }
 }
 
+class pedidosCliente {
+    constructor(producto, cantidad) {
+        this.producto = producto
+        this.cantidad = cantidad
+
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////ARRAY DEFINITION///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const pedidos = []                                                                  //Array para los pedidos
 const clientes = []                                                                 //Array de Clientes ingresados
+const productos = []                                                                //Array de Productos válidos
 let dniEncontrado = []
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +68,22 @@ let choice = 0
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////FUNCTIONS DEFINITION///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function cargaProductos(){
+    productos.push(new Producto(1, 'Dji Mavic 3', 3000, './img/DjiMavic3.jpg'));
+    productos.push(new Producto(2, 'Dji Air 2S', 2850, './img/DjiAir2S.jpg'));
+    productos.push(new Producto(3, 'Dji Mavic Air 2', 2700, './img/djidrone.jpg'));
+    productos.push(new Producto(4, 'Dji Mini 3 Pro', 3200, './img/djidrone.jpg'));
+    productos.push(new Producto(5, 'Dji Mini 2', 1500, './img/djidrone.jpg'));
+    productos.push(new Producto(6, 'Dji Mini SE', 1800, './img/djidrone.jpg'));
+    productos.push(new Producto(7, 'Dji FPV', 6000, './img/djidrone.jpg'));
+    productos.push(new Producto(8, 'Dji Digital FPV System', 4300, './img/djidrone.jpg'));
+    productos.push(new Producto(9, 'Dji Phantom 4 Pro V2.0', 1960, './img/djidrone.jpg'));
+    productos.push(new Producto(10, 'Dji Phantom 4 Pro', 3960, './img/djidrone.jpg'));
+    productos.push(new Producto(11, 'Dji Inspire 2', 2600, './img/djidrone.jpg'));
+    productos.push(new Producto(12, 'Dji Zenmuse X7', 7000, './img/djidrone.jpg'));
+}
+
 
 function productSelection() {                                                           //Funcion de Seleccion de productos
     choice = prompt("Ingrese los productos que desea adquirir");
@@ -101,29 +128,27 @@ function buscarCliente(cliente) {                                               
 //////////////////////////////PROGRAM EXECUTION //////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+cargaProductos()
+console.log(productos)
+
 //////////////////////////CARGO LOS PRODUCTOS DISPONIBLES EN EL HTML ///////////////////////////////////////////////
 let cards = document.getElementById("cards")
-let carta1 = document.createElement("div")
-let carta2 = document.createElement("div")
-carta1.className = "card"
-carta2.className = "card"
-carta1.innerHTML = `
-    <div className="card-body">
-        <h5 className="card-title">${producto1.nombre}</h5>
-        <p className="card-text">${producto1.precio}</p>
-        <a href="#" className="btn btn-primary">Comprar</a>
-    </div>
-    `
-cards.append(carta1)
-carta2.innerHTML = `
-    <div className="card-body">
-        <h5 className="card-title">${producto2.nombre}</h5>
-        <p className="card-text">${producto2.precio}</p>
-        <a href="#" className="btn btn-primary">Comprar</a>
-    </div>
-    `
-cards.append(carta2)
 
+
+for (const producto of productos) {
+    let carta = document.createElement("div")
+    carta.className = "card col-sm-3"
+    carta.innerHTML = `
+<img src=${producto.foto} class="card-img-top" alt=${producto.id}>
+    <div className="card-body">
+        <h5 className="card-title">${producto.nombre}</h5>
+        <p className="card-text">uSd ${producto.precio}</p>
+        <a href="#" className="btn btn-primary">Comprar</a>
+    </div>
+    `
+    cards.append(carta)
+
+}
 
 
 
