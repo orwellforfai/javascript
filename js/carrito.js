@@ -25,14 +25,6 @@ class Cliente {
     }
 }
 
-class pedidosCliente {
-    constructor(producto, cantidad) {
-        this.producto = producto
-        this.cantidad = cantidad
-
-    }
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////ARRAY DEFINITION///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,8 +38,8 @@ let dniEncontrado = []
 //////////////////////////////VARIABLES DEFINITION///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let producto1 = new Producto("Hamburguesa", 400)                        //Producto 1
-let producto2 = new Producto("Pizza Muzzarella", 600)                   //Producto 2
+let producto1 = new Producto(1,"Hamburguesa", 400)                        //Producto 1
+let producto2 = new Producto(2,"Pizza Muzzarella", 600)                   //Producto 2
 
 clientes.push((new Cliente(                                                           //Cliente 1 de la BD
     "Martin",
@@ -69,7 +61,7 @@ let choice = 0
 //////////////////////////////FUNCTIONS DEFINITION///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function cargaProductos(){
+function cargaProductos() {
     productos.push(new Producto(1, 'Dji Mavic 3', 3000, './img/DjiMavic3.jpg'));
     productos.push(new Producto(2, 'Dji Air 2S', 2850, './img/DjiAir2S.jpg'));
     productos.push(new Producto(3, 'Dji Mavic Air 2', 2700, './img/djidrone.jpg'));
@@ -85,17 +77,30 @@ function cargaProductos(){
 }
 
 
-function productSelection() {                                                           //Funcion de Seleccion de productos
+function productSelection(Producto) {                                                           //Funcion de Seleccion de productos
     choice = prompt("Ingrese los productos que desea adquirir");
     do {
-
         switch (choice) {                                                               //Switch de seleccion de
             case "1":                                                                   //productos disponibles
-                pedidos.push(producto1)
+                pedidos.push(Producto[1])
                 break;
-
             case "2":
-                pedidos.push(producto2)
+                pedidos.push(Producto[2])
+                break;
+            case "3":
+                pedidos.push(Producto[3])
+                break;
+            case "4":
+                pedidos.push(Producto[4])
+                break;
+            case "5":
+                pedidos.push(Producto[5])
+                break;
+            case "6":
+                pedidos.push(Producto[6])
+                break;
+            case "7":
+                pedidos.push(Producto[7])
                 break;
             default:
                 alert("Eligio un producto no valido")
@@ -119,42 +124,38 @@ function showCalculation() {                                                    
 
 function buscarCliente(cliente) {                                                   //Funcion de búsqueda de cliente ingresado
 
-
     return clientes.find((cli) => cli.dni == cliente);                              //devuelve un objeto Cliente o undefined si no está en el array
 }
 
+function cargaCards() {                                                              //CARGO LOS PRODUCTOS DISPONIBLES EN EL HTML
+
+    let cards = document.getElementById("cards")
+
+
+    for (const producto of productos) {
+        let carta = document.createElement("div")
+        carta.className = "card col-sm-3"
+        carta.innerHTML = `
+        <img src=${producto.foto} class="card-img-top" alt=${producto.id}>
+        <div className="card-body">
+            <h5 className="card-title">${producto.nombre}</h5>
+            <p className="card-text">US$ ${producto.precio}</p>
+            <a href="#" className="btn btn-primary">Comprar</a>
+        </div>
+        `
+        cards.append(carta)
+
+    }
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////PROGRAM EXECUTION //////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 cargaProductos()
-console.log(productos)
 
-//////////////////////////CARGO LOS PRODUCTOS DISPONIBLES EN EL HTML ///////////////////////////////////////////////
-let cards = document.getElementById("cards")
-
-
-for (const producto of productos) {
-    let carta = document.createElement("div")
-    carta.className = "card col-sm-3"
-    carta.innerHTML = `
-<img src=${producto.foto} class="card-img-top" alt=${producto.id}>
-    <div className="card-body">
-        <h5 className="card-title">${producto.nombre}</h5>
-        <p className="card-text">uSd ${producto.precio}</p>
-        <a href="#" className="btn btn-primary">Comprar</a>
-    </div>
-    `
-    cards.append(carta)
-
-}
-
-
-
-//////////////////////////////FIN DE CARGA DE PRODUCTOS DISPONIBLES ///////////////////////////////////////////////
-
-
+cargaCards()
 
 console.table(clientes)                                                              //Muestro por Consola el Array de Clientes
 
@@ -176,12 +177,7 @@ if (dniEncontrado == undefined) {
     console.log("Bienvenido:" + dniEncontrado.nombre)
 }
 
-
-console.log("Los productos disponibles son: ")                                      //Muestro Productos disponibles
-producto1.mostrarProducto()
-producto2.mostrarProducto()
-
-productSelection()                                                                  //Valido productos ingresados
+productSelection(productos)                                                          //Valido productos ingresados
 console.table(pedidos)                                                              //Muestro Ingresos
 totalCalculation()                                                                  //Calculo totales
 pedidos.forEach(ticket => console.log(("Los productos que ud compro son: " + (ticket.nombre))))
@@ -189,7 +185,7 @@ showCalculation()
 
 //////////////////////////////////////// DEFINO Y CARGO LA TABLA DE PEDIDOS EN EL HTML ///////////////////
 let pedidosTabla = document.createElement("table")
-pedidosTabla.className=("table table-dark table-striped")
+pedidosTabla.className = ("table table-dark table-striped")
 
 let tablaBody = document.createElement("tbody")
 
