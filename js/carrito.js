@@ -38,9 +38,6 @@ let dniEncontrado = []
 //////////////////////////////VARIABLES DEFINITION///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let producto1 = new Producto(1,"Hamburguesa", 400)                        //Producto 1
-let producto2 = new Producto(2,"Pizza Muzzarella", 600)                   //Producto 2
-
 clientes.push((new Cliente(                                                           //Cliente 1 de la BD
     "Martin",
     "Beltramo",
@@ -193,8 +190,8 @@ for (const pedido of pedidos) {
 
     tablaBody.innerHTML += `
     <tr> 
-        <td>${pedidos.nombre} </td>
-        <td>${pedidos.precio} </td>
+        <td>${pedido.nombre} </td>
+        <td>${pedido.precio} </td>
     </tr>    
     `
 }
