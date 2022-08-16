@@ -101,6 +101,36 @@ function buscarCliente(cliente) {                                               
 //////////////////////////////PROGRAM EXECUTION //////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////CARGO LOS PRODUCTOS DISPONIBLES EN EL HTML ///////////////////////////////////////////////
+let cards = document.getElementById("cards")
+let carta1 = document.createElement("div")
+let carta2 = document.createElement("div")
+carta1.className = "card"
+carta2.className = "card"
+carta1.innerHTML = `
+    <div className="card-body">
+        <h5 className="card-title">${producto1.nombre}</h5>
+        <p className="card-text">${producto1.precio}</p>
+        <a href="#" className="btn btn-primary">Comprar</a>
+    </div>
+    `
+cards.append(carta1)
+carta2.innerHTML = `
+    <div className="card-body">
+        <h5 className="card-title">${producto2.nombre}</h5>
+        <p className="card-text">${producto2.precio}</p>
+        <a href="#" className="btn btn-primary">Comprar</a>
+    </div>
+    `
+cards.append(carta2)
+
+
+
+
+//////////////////////////////FIN DE CARGA DE PRODUCTOS DISPONIBLES ///////////////////////////////////////////////
+
+
+
 console.table(clientes)                                                              //Muestro por Consola el Array de Clientes
 
 let clienteIngresado = parseInt(prompt("Ingrese su DNI para ingresar a la base de Clientes: ")) // Pido un DNI para buscar si ya está ingresado al sistema
@@ -121,6 +151,7 @@ if (dniEncontrado == undefined) {
     console.log("Bienvenido:" + dniEncontrado.nombre)
 }
 
+
 console.log("Los productos disponibles son: ")                                      //Muestro Productos disponibles
 producto1.mostrarProducto()
 producto2.mostrarProducto()
@@ -130,3 +161,24 @@ console.table(pedidos)                                                          
 totalCalculation()                                                                  //Calculo totales
 pedidos.forEach(ticket => console.log(("Los productos que ud compro son: " + (ticket.nombre))))
 showCalculation()
+
+//////////////////////////////////////// DEFINO Y CARGO LA TABLA DE PEDIDOS EN EL HTML ///////////////////
+let pedidosTabla = document.createElement("table")
+pedidosTabla.className=("table table-dark table-striped")
+
+let tablaBody = document.createElement("tbody")
+
+for (const pedido of pedidos) {
+
+    tablaBody.innerHTML += `
+    <tr> 
+        <td>${pedidos.nombre} </td>
+        <td>${pedidos.precio} </td>
+    </tr>    
+    `
+}
+pedidosTabla.append(tablaBody)
+let pedidosEnTabla = document.getElementById("pedido")
+pedidosEnTabla.append(pedidosTabla)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
