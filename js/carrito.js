@@ -128,23 +128,43 @@ function cargaCards() {                                                         
 
     let cards = document.getElementById("cards")
 
-
     for (const producto of productos) {
         let carta = document.createElement("div")
         carta.className = "card col-sm-3"
         carta.innerHTML = `
-        <img src=${producto.foto} class="card-img-top" alt=${producto.id}>
+        <img src=${producto.foto} class="card-img-top" alt=${producto.id}/>
         <div className="card-body">
             <h5 className="card-title">${producto.nombre}</h5>
             <p className="card-text">US$ ${producto.precio}</p>
-            <a href="#" className="btn btn-primary">Comprar</a>
+            <button id="comprarBoton-${producto.id}" class="btn btn-success botonComprar">Comprar</button>
         </div>
         `
         cards.append(carta)
 
     }
-
 }
+function cargaPedidos(){
+    //////////////////////////////////////// DEFINO Y CARGO LA TABLA DE PEDIDOS EN EL HTML ///////////////////
+    let pedidosTabla = document.createElement("table")
+    pedidosTabla.className = ("table table-dark table-striped")
+
+    let tablaBody = document.createElement("tbody")
+
+    for (const pedido of pedidos) {
+
+        tablaBody.innerHTML += `
+    <tr> 
+        <td>${pedido.nombre} </td>
+        <td>${pedido.precio} </td>
+    </tr>    
+    `
+    }
+    pedidosTabla.append(tablaBody)
+    let pedidosEnTabla = document.getElementById("pedido")
+    pedidosEnTabla.append(pedidosTabla)
+}
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////PROGRAM EXECUTION //////////////////////////////////////////////////////////////////////////////
@@ -180,23 +200,10 @@ totalCalculation()                                                              
 pedidos.forEach(ticket => console.log(("Los productos que ud compro son: " + (ticket.nombre))))
 showCalculation()
 
-//////////////////////////////////////// DEFINO Y CARGO LA TABLA DE PEDIDOS EN EL HTML ///////////////////
-let pedidosTabla = document.createElement("table")
-pedidosTabla.className = ("table table-dark table-striped")
+cargaPedidos()
 
-let tablaBody = document.createElement("tbody")
+let botonDos=document.getElementById(`comprarBoton-${producto.id}`)
+botonDos.onclick= () =>{alert("Hola Boton Dos")}
 
-for (const pedido of pedidos) {
+// productSelection(productos[botonDos.id])
 
-    tablaBody.innerHTML += `
-    <tr> 
-        <td>${pedido.nombre} </td>
-        <td>${pedido.precio} </td>
-    </tr>    
-    `
-}
-pedidosTabla.append(tablaBody)
-let pedidosEnTabla = document.getElementById("pedido")
-pedidosEnTabla.append(pedidosTabla)
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
